@@ -3,11 +3,35 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import LoginForm from './Components/LoginReg/LoginForm/LoginForm';
+import RegisterForm from './Components/LoginReg/RegisterForm/RegisterForm';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+// remover os /* */
+
+// to-do list
+
+/* root.render(
   <React.StrictMode>
     <App />
+  </React.StrictMode>
+); */
+
+
+// login
+
+/* root.render(
+  <React.StrictMode>
+    <LoginForm />
+  </React.StrictMode>
+); */
+
+
+// registro
+
+root.render(
+  <React.StrictMode>
+    <RegisterForm />
   </React.StrictMode>
 );
 
