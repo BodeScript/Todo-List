@@ -24,7 +24,7 @@ export default function RegisterForm() {
         </div>
         <button type="submit">Criar conta</button>
         <div className="register">
-          <p>Já possui uma conta? <a href="/#">Entrar</a></p>
+          <p>Já possui uma conta? <a href="/login">Entrar</a></p>
         </div>
       </form>
     </div>

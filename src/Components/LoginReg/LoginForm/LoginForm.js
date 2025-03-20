@@ -16,7 +16,7 @@ export default function LoginForm() {
         </div>
         <button type="submit">Entrar</button>
         <div className="register">
-          <p>Não tem uma conta? <a href="/#">Crie uma</a></p>
+          <p>Não tem uma conta? <a href="/register">Crie uma</a></p>
         </div>
       </form>
     </div>
