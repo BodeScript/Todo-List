@@ -14,7 +14,7 @@ export default function LoginForm() {
           <p>Senha</p>
           <input type="password" placeholder="Digite sua senha" />
         </div>
-        <button className="btn" type="submit">Entrar</button>
+        <button type="submit">Entrar</button>
         <div className="register">
           <p>Não tem uma conta? <a href="/#">Crie uma</a></p>
         </div>

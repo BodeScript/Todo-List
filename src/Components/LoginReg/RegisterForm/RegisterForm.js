@@ -22,7 +22,7 @@ export default function RegisterForm() {
           <p>Confirme a senha</p>
           <input type="password" placeholder="Digite novamente sua senha" />
         </div>
-        <button className="btn" type="submit">Criar conta</button>
+        <button type="submit">Criar conta</button>
         <div className="register">
           <p>Já possui uma conta? <a href="/#">Entrar</a></p>
         </div>
