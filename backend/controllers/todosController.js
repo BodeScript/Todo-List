@@ -1,10 +1,18 @@
 // backend/controllers/todosController.js
-const pool = require('../database');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 const getAllTodos = async (req, res) => {
+  const userId = parseInt(req.query.userId); // Pegamos o userId da query string
+
   try {
-    const result = await pool.query('SELECT * FROM todos ORDER BY id ASC');
-    res.status(200).json(result.rows);
+    const todos = await prisma.todo.findMany({
+      where: {
+        userId: userId, // Filtramos as tarefas pelo userId
+      },
+      orderBy: { id: 'asc' },
+    });
+    res.status(200).json(todos);
   } catch (error) {
     console.error('Erro ao buscar tarefas:', error);
     res.status(500).json({ error: 'Erro interno do servidor' });
@@ -14,9 +22,11 @@ const getAllTodos = async (req, res) => {
 const getTodoById = async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await pool.query('SELECT * FROM todos WHERE id = $1', [id]);
-    if (result.rows.length > 0) {
-      res.status(200).json(result.rows[0]);
+    const todo = await prisma.todo.findUnique({
+      where: { id: parseInt(id) },
+    });
+    if (todo) {
+      res.status(200).json(todo);
     } else {
       res.status(404).json({ message: 'Tarefa não encontrada' });
     }
@@ -27,16 +37,22 @@ const getTodoById = async (req, res) => {
 };
 
 const createTodo = async (req, res) => {
-  const { title, description } = req.body;
+  const { title, description, completed, userId, category } = req.body;
+
   try {
-    const result = await pool.query(
-      'INSERT INTO todos (title, description) VALUES ($1, $2) RETURNING *',
-      [title, description]
-    );
-    res.status(201).json(result.rows[0]);
+    const newTodo = await prisma.todo.create({
+      data: {
+        title: title,
+        description: description || null,
+        completed: completed || false,
+        userId: parseInt(userId), // Certifique-se de que userId seja um número inteiro
+        category: category || null,
+      },
+    });
+    res.status(201).json(newTodo); // Responde com a tarefa criada e status 201 (Created)
   } catch (error) {
-    console.error('Erro ao criar tarefa:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    console.error("Erro ao criar tarefa:", error);
+    res.status(500).json({ error: "Erro ao criar tarefa" }); // Responde com erro interno do servidor
   }
 };
 
@@ -44,33 +60,32 @@ const updateTodo = async (req, res) => {
   const { id } = req.params;
   const { title, description, completed } = req.body;
   try {
-    const result = await pool.query(
-      'UPDATE todos SET title = $1, description = $2, completed = $3, updated_at = CURRENT_TIMESTAMP WHERE id = $4 RETURNING *',
-      [title, description, completed, id]
-    );
-    if (result.rows.length > 0) {
-      res.status(200).json(result.rows[0]);
-    } else {
-      res.status(404).json({ message: 'Tarefa não encontrada' });
-    }
+    const updatedTodo = await prisma.todo.update({
+      where: { id: parseInt(id) },
+      data: {
+        title,
+        description,
+        completed: completed === 'true', // Converter para booleano
+        updatedAt: new Date(),
+      },
+    });
+    res.status(200).json(updatedTodo);
   } catch (error) {
     console.error('Erro ao atualizar tarefa:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    res.status(404).json({ message: 'Tarefa não encontrada' });
   }
 };
 
 const deleteTodo = async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await pool.query('DELETE FROM todos WHERE id = $1 RETURNING *', [id]);
-    if (result.rows.length > 0) {
-      res.status(200).json({ message: 'Tarefa deletada com sucesso' });
-    } else {
-      res.status(404).json({ message: 'Tarefa não encontrada' });
-    }
+    const deletedTodo = await prisma.todo.delete({
+      where: { id: parseInt(id) },
+    });
+    res.status(200).json({ message: 'Tarefa deletada com sucesso' });
   } catch (error) {
     console.error('Erro ao deletar tarefa:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    res.status(404).json({ message: 'Tarefa não encontrada' });
   }
 };
 

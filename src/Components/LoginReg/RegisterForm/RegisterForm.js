@@ -1,26 +1,87 @@
-import React from "react";
-import './RegisterForm.css'
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './RegisterForm.css';
 
 export default function RegisterForm() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert('As senhas não coincidem.');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:3000/api/auth/register', {
+        username: username,
+        email: email,
+        password: password,
+      });
+
+      if (response.status >= 200 && response.status < 300) {
+        console.log('Registro bem-sucedido:', response.data);
+        localStorage.setItem('userId', response.data.userId); // Armazena o userId
+        alert('Conta criada com sucesso! Você será redirecionado para a página de login.');
+        navigate('/login');
+      } else {
+        console.error('Erro no registro:', response.data);
+        alert('Ocorreu um erro ao tentar criar a conta. Por favor, tente novamente mais tarde.');
+      }
+    } catch (error) {
+      console.error('Erro ao fazer a requisição de registro:', error);
+      alert('Ocorreu um erro ao tentar criar a conta. Por favor, tente novamente mais tarde.');
+    }
+  };
+
   return (
     <div className="wrapper-reg">
-      <form action="">
+      <form onSubmit={handleRegister}>
         <h1>Registro de usuário</h1>
         <div className="input-box">
           <p>Nome de usuário</p>
-          <input type="text" placeholder="Digite seu nome de usuário" />
+          <input
+            type="text"
+            placeholder="Digite seu nome de usuário"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
         </div>
         <div className="input-box">
           <p>E-mail</p>
-          <input type="text" placeholder="Digite seu endereço de e-mail" />
+          <input
+            type="text"
+            placeholder="Digite seu endereço de e-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="input-box">
           <p>Senha</p>
-          <input type="password" placeholder="Digite sua senha" />
+          <input
+            type="password"
+            placeholder="Digite sua senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </div>
         <div className="input-box">
           <p>Confirme a senha</p>
-          <input type="password" placeholder="Digite novamente sua senha" />
+          <input
+            type="password"
+            placeholder="Digite novamente sua senha"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
         </div>
         <button type="submit">Criar conta</button>
         <div className="register">
@@ -28,5 +89,5 @@ export default function RegisterForm() {
         </div>
       </form>
     </div>
-  )
+  );
 }
