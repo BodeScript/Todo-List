@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Certifique-se de que esta URL esteja correta no seu .env
+}
+
+model Todo {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
+  description String?  @db.Text
+  completed   Boolean  @default(false)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
+  userId      Int
+  category    String?  // Campo adicionado para a categoria
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade, name: "UserTodos")
+
+  @@index([userId])
+  @@map("todos")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  email    String @unique
+  password String
+  todos    Todo[] @relation(name: "UserTodos") // Alteração feita aqui
+
+  @@map("users")
+}
