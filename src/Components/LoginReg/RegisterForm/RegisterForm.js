@@ -19,24 +19,39 @@ export default function RegisterForm() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/register', {
-        username: username,
-        email: email,
-        password: password,
-      });
+       const response = await axios.post("http://localhost:3001/api/auth/register", {
+          username: username,
+          email: email,
+          password: password,
+       });
 
-      if (response.status >= 200 && response.status < 300) {
-        console.log('Registro bem-sucedido:', response.data);
-        localStorage.setItem('userId', response.data.userId); // Armazena o userId
-        alert('Conta criada com sucesso! Você será redirecionado para a página de login.');
-        navigate('/login');
-      } else {
-        console.error('Erro no registro:', response.data);
-        alert('Ocorreu um erro ao tentar criar a conta. Por favor, tente novamente mais tarde.');
-      }
+       if (response.status >= 200 && response.status < 300) {
+          console.log("Registro bem-sucedido:", response.data);
+          localStorage.setItem("userId", response.data.userId); // Armazena o userId
+          alert(
+             "Conta criada com sucesso! Você será redirecionado para a página de login."
+          );
+          navigate("/login");
+       } else {
+          // Aqui podemos lidar com outros erros que não sejam o 409
+          console.error("Erro no registro:", response.data);
+          alert(
+             response.data.message ||
+                "Ocorreu um erro ao tentar criar a conta. Por favor, tente novamente mais tarde."
+          );
+       }
     } catch (error) {
-      console.error('Erro ao fazer a requisição de registro:', error);
-      alert('Ocorreu um erro ao tentar criar a conta. Por favor, tente novamente mais tarde.');
+       console.error("Erro ao fazer a requisição de registro:", error);
+
+      
+       if (error.response && error.response.status === 409) {
+          alert("Nome de usuário já existe. Por favor, escolha outro.");
+       } else {
+          
+          alert(
+             "Ocorreu um erro ao tentar criar a conta. Por favor, tente novamente mais tarde."
+          );
+       }
     }
   };
 
