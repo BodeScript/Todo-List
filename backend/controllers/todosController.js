@@ -49,23 +49,21 @@ const createTodo = async (req, res) => {
         category: category || null,
       },
     });
-    res.status(201).json(newTodo); // Responde com a tarefa criada e status 201 (Created)
+    res.status(201).json(newTodo);
   } catch (error) {
     console.error("Erro ao criar tarefa:", error);
-    res.status(500).json({ error: "Erro ao criar tarefa" }); // Responde com erro interno do servidor
+    res.status(500).json({ error: "Erro ao criar tarefa" });
   }
 };
 
 const updateTodo = async (req, res) => {
   const { id } = req.params;
-  const { title, description, completed } = req.body;
+  const {completed } = req.body;
   try {
     const updatedTodo = await prisma.todo.update({
       where: { id: parseInt(id) },
       data: {
-        title,
-        description,
-        completed: completed === 'true', // Converter para booleano
+        completed: completed === true,
         updatedAt: new Date(),
       },
     });

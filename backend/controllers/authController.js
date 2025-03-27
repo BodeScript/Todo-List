@@ -25,13 +25,13 @@ const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    // Verifique se já existe um usuário com esse nome de usuário
+   
     const existingUser = await prisma.user.findUnique({ where: { username } });
     if (existingUser) {
       return res.status(409).json({ message: 'Nome de usuário já existe.' }); // 409 Conflict
     }
 
-    // Gere o hash da senha
+   
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Crie um novo usuário no banco de dados

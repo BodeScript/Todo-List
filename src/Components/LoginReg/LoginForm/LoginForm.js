@@ -24,11 +24,19 @@ export default function LoginForm({ onLogin }) {
         navigate('/home');
       } else {
         console.error('Erro no login:', response.data);
-        alert('Nome de usuário ou senha incorretos.');
+        alert(response.data.message || 'correu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.');
       }
     } catch (error) {
-      console.error('Erro ao fazer a requisição de login:', error);
-      alert('Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.');
+       console.error("Erro ao fazer a requisição de login:", error);
+       if (error.response && error.response.status === 401) {
+          alert(
+             "Nome de usuário ou senha incorretos. Por favor, verifique e tente novamente."
+          );
+       } else {
+          alert(
+             "Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde."
+          );
+       }
     }
   };
 
