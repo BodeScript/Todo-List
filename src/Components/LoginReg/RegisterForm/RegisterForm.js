@@ -81,10 +81,11 @@ export default function RegisterForm() {
             <span> E-mail</span>
           </p>
           <input
-            type="text"
+            type="email"
             placeholder="Digite seu endereço de e-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
         <div className="input-box">
@@ -103,7 +104,7 @@ export default function RegisterForm() {
         <div className="input-box">
           <p>
             <CiLock />
-            <span> Senha</span>
+            <span> Confirme sua senha</span>
           </p>
           <input
             type="password"

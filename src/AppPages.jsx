@@ -15,17 +15,6 @@ const AppPages = () => {
   return (
     <Router>
       <>
-        <nav>
-          <ul className="ul">
-            <li className="li">
-              <Link to='/login'><button>Entrar</button></Link>
-            </li>
-            <li className="li">
-              <Link to='/register'><button>Criar conta</button></Link>
-            </li>
-          </ul>
-        </nav>
-
         <Routes>
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path='/login' element={<Entrar onLogin={handleLoginSuccess} />} />

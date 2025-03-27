@@ -82,9 +82,9 @@
 
 @media (orientation: portrait) {
   .wrapper {
-    margin-top: -25px;
+    margin-top: -50px;
     width: 100vw;
     height: 100vh;
-    scrollbar-width: 0;
+    border-radius: 0;
   }
 }
