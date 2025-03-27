@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './RegisterForm.css';
+import { CiUser } from "react-icons/ci";
+import { CiLock } from "react-icons/ci";
+import { CiMail } from "react-icons/ci";
 
 export default function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -60,7 +63,10 @@ export default function RegisterForm() {
       <form onSubmit={handleRegister}>
         <h1>Registro de usuário</h1>
         <div className="input-box">
-          <p>Nome de usuário</p>
+          <p>
+            <CiUser />
+            <span> Nome de usuário</span>
+          </p>
           <input
             type="text"
             placeholder="Digite seu nome de usuário"
@@ -70,7 +76,10 @@ export default function RegisterForm() {
           />
         </div>
         <div className="input-box">
-          <p>E-mail</p>
+          <p>
+            <CiMail />
+            <span> E-mail</span>
+          </p>
           <input
             type="text"
             placeholder="Digite seu endereço de e-mail"
@@ -79,7 +88,10 @@ export default function RegisterForm() {
           />
         </div>
         <div className="input-box">
-          <p>Senha</p>
+          <p>
+            <CiLock />
+            <span> Senha</span>
+          </p>
           <input
             type="password"
             placeholder="Digite sua senha"
@@ -89,7 +101,10 @@ export default function RegisterForm() {
           />
         </div>
         <div className="input-box">
-          <p>Confirme a senha</p>
+          <p>
+            <CiLock />
+            <span> Senha</span>
+          </p>
           <input
             type="password"
             placeholder="Digite novamente sua senha"

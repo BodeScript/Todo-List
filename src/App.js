@@ -120,7 +120,7 @@ const App = () => {
 
    return (
       <div className="app">
-         <h1>Lista de Tarefas</h1>
+         <h1 className="logo-title"><img src="logo.svg" alt="teste"/><span>Lista de Afazeres</span></h1>
          <Search search={search} setSearch={setSearch} />
          <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
          <div className="todo-list">

@@ -1,8 +1,12 @@
 import React from "react";
+import { MdSearch } from "react-icons/md";
 
 const Search = ({search, setSearch}) => (
     <div className="search">
-        <h2>Pesquisar:</h2>
+        <h2>
+          <MdSearch />
+          <span> Pesquisar:</span>
+        </h2>
         <input 
           type="text" 
           value={search} 

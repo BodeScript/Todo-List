@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LoginForm.css';
+import { CiUser } from "react-icons/ci";
+import { CiLock } from "react-icons/ci";
 
 export default function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('');
@@ -45,7 +47,10 @@ export default function LoginForm({ onLogin }) {
       <form onSubmit={handleLogin}>
         <h1>Bem-vindo de volta!</h1>
         <div className="input-box">
-          <p>Usuário</p>
+          <p>
+            <CiUser />
+            <span> Usuário</span>
+          </p>
           <input
             type="text"
             placeholder="Digite seu nome de usuário"
@@ -55,7 +60,10 @@ export default function LoginForm({ onLogin }) {
           />
         </div>
         <div className="input-box">
-          <p>Senha</p>
+          <p>
+            <CiLock />
+            <span> Senha</span>
+          </p>
           <input
             type="password"
             placeholder="Digite sua senha"

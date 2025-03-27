@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MdChecklist } from "react-icons/md";
 
 const TodoForm = ({ addTodo }) => {
   const [value, setValue] = useState("");
@@ -14,7 +15,10 @@ const TodoForm = ({ addTodo }) => {
 
   return (
     <div className="todo-form">
-      <h2>Criar tarefa:</h2>
+      <h2>
+        <MdChecklist />
+        <span> Criar tarefa:</span>
+      </h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -24,7 +28,7 @@ const TodoForm = ({ addTodo }) => {
           onChange={(e) => setValue(e.target.value)}
         />
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="">Seleciona uma categoria</option>
+          <option value="">Selecione uma categoria</option>
           <option value="Trabalho">Trabalho</option>
           <option value="Pessoal">Pessoal</option>
           <option value="Estudos">Estudos</option>
