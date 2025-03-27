@@ -118,37 +118,46 @@ const App = () => {
    }
    };
 
+   const logout = () => {
+      localStorage.clear();
+      window.location.href = '/';
+  };
+
    return (
-      <div className="app">
-         <h1 className="logo-title"><img src="logo.svg" alt="teste"/><span>Lista de Afazeres</span></h1>
-         <Search search={search} setSearch={setSearch} />
-         <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
-         <div className="todo-list">
-            {console.log("Estado de 'todos' antes do filtro:", todos)}
-            {todos
-               .filter(
-                  (todo) =>
-                     todo &&
-                     todo.title &&
-                     todo.title.toLowerCase().includes(search.toLowerCase())
-               )
-               .sort((a, b) =>
-                  sort === "Asc"
-                     ? a.title.localeCompare(b.title)
-                     : b.title.localeCompare(a.title)
-               )
-               .map((todo, index) => (
-                  <Todo
-                     key={index}
-                     index={index}
-                     todo={todo}
-                     completeTodo={completeTodo}
-                     removeTodo={removeTodo}
-                  />
-               ))}
+      <>
+         <div className="app">
+            <h1 className="logo-title"><img src="logo.svg" alt="teste"/><span>Lista de Afazeres</span></h1>
+            <Search search={search} setSearch={setSearch} />
+            <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
+            <div className="todo-list">
+               {console.log("Estado de 'todos' antes do filtro:", todos)}
+               {todos
+                  .filter(
+                     (todo) =>
+                        todo &&
+                        todo.title &&
+                        todo.title.toLowerCase().includes(search.toLowerCase())
+                  )
+                  .sort((a, b) =>
+                     sort === "Asc"
+                        ? a.title.localeCompare(b.title)
+                        : b.title.localeCompare(a.title)
+                  )
+                  .map((todo, index) => (
+                     <Todo
+                        key={index}
+                        index={index}
+                        todo={todo}
+                        completeTodo={completeTodo}
+                        removeTodo={removeTodo}
+                     />
+                  ))}
+            </div>
+            <TodoForm addTodo={addTodo} />
          </div>
-         <TodoForm addTodo={addTodo} />
-      </div>
+         <button className="logout" onClick={logout}>Sair</button>
+      </>
+      
    );
 };
 
