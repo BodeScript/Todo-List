@@ -79,3 +79,12 @@
 .wrapper .register a:hover {
   text-decoration: underline;
 }
+
+@media (orientation: portrait) {
+  .wrapper {
+    margin-top: -25px;
+    width: 100vw;
+    height: 100vh;
+    scrollbar-width: 0;
+  }
+}

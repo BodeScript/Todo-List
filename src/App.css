@@ -11,9 +11,11 @@ body {
 .app {
   max-width: 600px;
   margin: 0 auto;
+  margin-top: 25px;
   padding: 0.5rem 2rem;
-  border-radius: 10px;
-  background-color: #efefef;
+  border-radius: 20px;
+  background-color: #fff;
+  color: #0f0f0f;
 }
 
 h1 {
@@ -55,14 +57,14 @@ input {
 }
 
 button {
-  background-color: #333974;
+  background-color: #1570ef;
   color: #fff;
   padding: 5px 10px;
   border: none;
-  border-radius: 3px;
+  border-radius: 8px;
   margin-left: 5px;
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 1;
   transition: 0.3s;
 }
 
@@ -82,10 +84,10 @@ button.remove {
 
 input[type="text"],
 select {
-  padding: 5px;
+  padding: 11.25px 5px;
   margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
+  border: 1px solid #d1e9ff;
+  border-radius: 8px;
   width: 100%;
 }
 
@@ -108,4 +110,18 @@ select {
 
 .filter-options div {
   flex: 1 1 0;
+}
+
+.logo-title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  user-select: none;
+  border-bottom: 1px solid #555;
+}
+.logo-title img {
+  height: 15vh;
+}
+.logo-title span {
+  margin-bottom: 1rem;
 }

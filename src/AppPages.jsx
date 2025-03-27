@@ -18,9 +18,6 @@ const AppPages = () => {
         <nav>
           <ul className="ul">
             <li className="li">
-              <Link to='/home'><button>Página inicial</button></Link>
-            </li>
-            <li className="li">
               <Link to='/login'><button>Entrar</button></Link>
             </li>
             <li className="li">

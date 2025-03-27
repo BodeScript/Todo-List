@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import { MdDone } from "react-icons/md";
+import { MdClose } from "react-icons/md";
 
 const Todo = ({ todo, completeTodo, removeTodo }) => {
    const handleComplete = async (todoId, currentStatus) => {
@@ -24,17 +26,17 @@ const Todo = ({ todo, completeTodo, removeTodo }) => {
       >
          <div className="content">
             <p>{todo.title}</p>
-            <p className="category">({todo.category})</p>
+            <p className="category">{todo.category}</p>
          </div>
          <div>
             <button
                className="complete"
                onClick={() => handleComplete(todo.id, todo.completed)}
             >
-               Realizada
+               <MdDone />
             </button>
             <button className="remove" onClick={() => removeTodo(todo.id)}>
-               x
+               <MdClose />
             </button>
          </div>
       </div>
