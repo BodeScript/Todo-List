@@ -19,7 +19,7 @@ export default function RegisterForm() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/register', {
+      const response = await axios.post('http://localhost:3001/api/auth/register', {
         username: username,
         email: email,
         password: password,

@@ -27,7 +27,7 @@ const App = () => {
 
   const fetchTodos = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/todos?userId=${userId}`);
+      const response = await fetch(`http://localhost:3001/api/todos?userId=${userId}`);
       if (response.ok) {
         const data = await response.json();
         console.log("Dados recebidos do backend:", data); // Adicione este log
@@ -48,7 +48,7 @@ const App = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:3000/api/todos', {
+      const response = await fetch('http://localhost:3001/api/todos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ const App = () => {
 
   const removeTodo = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/todos/${id}`, {
+      const response = await fetch(`http://localhost:3001/api/todos/${id}`, {
         method: 'DELETE',
       });
 

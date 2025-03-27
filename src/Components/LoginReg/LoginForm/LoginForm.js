@@ -12,7 +12,7 @@ export default function LoginForm({ onLogin }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/login', {
+      const response = await axios.post('http://localhost:3001/api/auth/login', {
         username: username,
         password: password,
       });

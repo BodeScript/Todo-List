@@ -5,7 +5,7 @@ const todosRoutes = require('./routes/todos');
 const authRoutes = require('./routes/auth'); // Importe as rotas de autenticação
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // Middleware para analisar o corpo das requisições
 app.use(bodyParser.json());
